@@ -14,6 +14,11 @@ if exist "%ProgramFiles%\Microsoft Visual Studio\18\Professional\VC\Auxiliary\Bu
 	goto start
 )
 
+if exist "%ProgramFiles%\Microsoft Visual Studio\18\Insiders\VC\Auxiliary\Build\vcvarsall.bat" (
+	call "%ProgramFiles%\Microsoft Visual Studio\18\Insiders\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
+	goto start
+)
+
 echo VS 2026 was not found...
 
 goto end
