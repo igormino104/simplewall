@@ -691,8 +691,8 @@ BOOLEAN _app_calculatefilehash (
 )
 {
 	static R_INITONCE init_once = PR_INITONCE_INIT;
-	static CCAHFFH2 _CryptCATAdminCalcHashFromFileHandle2 = NULL;
-	static CCAAC2 _CryptCATAdminAcquireContext2 = NULL;
+	static PAPP_CRYPTCATADMINCALCHASHFROMFILEHANDLE2 _CryptCATAdminCalcHashFromFileHandle2 = NULL;
+	static PAPP_CRYPTCATADMINACQUIRECONTEXT2 _CryptCATAdminAcquireContext2 = NULL;
 
 	GUID DriverActionVerify = DRIVER_ACTION_VERIFY;
 	HCATADMIN hcat_admin;
@@ -707,8 +707,8 @@ BOOLEAN _app_calculatefilehash (
 
 		if (NT_SUCCESS (status))
 		{
-			_CryptCATAdminCalcHashFromFileHandle2 = (CCAHFFH2)_r_sys_getprocaddress (hwintrust, "CryptCATAdminCalcHashFromFileHandle2", 0);
-			_CryptCATAdminAcquireContext2 = (CCAAC2)_r_sys_getprocaddress (hwintrust, "CryptCATAdminAcquireContext2", 0);
+			_CryptCATAdminCalcHashFromFileHandle2 = (PAPP_CRYPTCATADMINCALCHASHFROMFILEHANDLE2)_r_sys_getprocaddress (hwintrust, "CryptCATAdminCalcHashFromFileHandle2", 0);
+			_CryptCATAdminAcquireContext2 = (PAPP_CRYPTCATADMINACQUIRECONTEXT2)_r_sys_getprocaddress (hwintrust, "CryptCATAdminAcquireContext2", 0);
 
 			// _r_sys_freelibrary (hwintrust, FALSE);
 		}
@@ -777,7 +777,7 @@ PR_STRING _app_verifygetstring (
 	PCRYPT_PROVIDER_DATA prov_data;
 	PCRYPT_PROVIDER_SGNR prov_signer;
 	PCRYPT_PROVIDER_CERT prov_cert;
-	PR_STRING string;
+	PR_STRING string = NULL;
 	ULONG length;
 	ULONG idx = 0;
 
@@ -1106,7 +1106,7 @@ PR_STRING _app_getfilehashinfo (
 )
 {
 	PITEM_APP ptr_app;
-	PR_STRING string;
+	PR_STRING string = NULL;
 
 	ptr_app = _app_getappitem (app_hash);
 

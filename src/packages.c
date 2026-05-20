@@ -554,7 +554,7 @@ VOID _app_package_getserviceslist (
 	{
 		service = &services[i];
 
-		app_hash = _r_str_gethash2 (service->lpServiceName, TRUE);
+		app_hash = (_r_str_gethash) (service->lpServiceName, TRUE);
 
 		if (_app_isappfound (app_hash))
 			continue;
